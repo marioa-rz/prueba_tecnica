@@ -38,7 +38,7 @@ DATABASE_URL="postgresql://user:password@host:port/database_name"
 
 ```
 ```env
-# Configuración del servidor
+# Base de datos utilizada para el proyecto
 -- 1. CREACIÓN DE LA BASE DE DATOS
 CREATE DATABASE prueba_db; 
 
