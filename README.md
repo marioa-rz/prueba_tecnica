@@ -37,8 +37,12 @@ NODE_ENV=development # Cambiar a production para despliegue
 DATABASE_URL="postgresql://user:password@host:port/database_name"
 
 ```
+
+### 1. Variables de Entorno
+
+Base de datos utilizada para el proyecto
+
 ```env
-# Base de datos utilizada para el proyecto
 -- 1. CREACIÓN DE LA BASE DE DATOS
 CREATE DATABASE prueba_db; 
 
