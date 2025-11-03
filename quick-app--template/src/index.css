@@ -1,0 +1,430 @@
+/*
+ * =========================================================================
+ * DOCUMENTACIÓN GENERAL
+ * Este archivo CSS define los estilos globales y los específicos para las
+ * secciones principales de la aplicación: Navegación, Gestión de Entidades
+ * (Monedas) y Tablas de Históricos.
+ * Implementa un sistema de variables CSS para facilitar el manejo de temas
+ * (Modo Oscuro por defecto y Modo Claro vía Media Query).
+ * =========================================================================
+ */
+
+
+/* ======================================= */
+/* 1. VARIABLES Y ESTILOS GLOBALES (index.css) */
+/* ======================================= */
+
+/* --- Variables de Tema (Por Defecto: Modo Oscuro) --- */
+:root {
+  /* Tipografía base */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Manejo de Modo Oscuro / Claro del Navegador */
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87); /* Color de texto base */
+  background-color: #242424; /* Color de fondo base */
+
+  /* Variables de Color Semántico */
+  --color-primary: #646cff; /* Azul: Acciones principales, botones, enlaces */
+  --color-secondary: #ffffff; /* Texto principal */
+  --color-text-secondary: #ccc; /* Texto secundario/desvanecido */
+
+  /* Variables de Fondo */
+  --background-page: #1a1a1a; /* Fondo principal de la página */
+  --background-card: #2f2f2f; /* Fondo de contenedores/tarjetas */
+
+  /* Variables de Elementos de Formulario/Lista */
+  --border-color: #3a3a3a; /* Borde general */
+  --input-bg: #1e1e1e; /* Fondo de campos de entrada */
+  --input-color: #e0e0e0; /* Color de texto de entrada */
+  --placeholder-color: #888; /* Color de placeholder de entrada */
+  --item-bg: #2a2a2a; /* Fondo de elementos de lista/fila de tabla */
+  --item-bg-hover: #333; /* Fondo de elementos de lista al pasar el ratón */
+}
+
+/* --- Estilos de la Etiqueta <body> --- */
+body {
+  margin: 0;
+  display: flex; 
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: flex-start; /* Alinea el contenido al inicio verticalmente */
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background-page);
+}
+
+/* --- Estilos de Título Principal --- */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--color-secondary);
+}
+
+/* --- Estilos de Botón Base --- */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+  color: var(--color-secondary);
+}
+
+button:hover {
+  border-color: var(--color-primary); /* Resaltar borde en hover */
+}
+
+
+/* --- Media Query para Modo Claro --- */
+@media (prefers-color-scheme: light) {
+  :root {
+    /* Sobrescribe las variables de color para el modo claro */
+    color: #213547;
+    background-color: #ffffff;
+    --color-primary: #535bf2;
+    --color-secondary: #213547;
+    --color-text-secondary: #444;
+
+    --background-page: #f0f0f0;
+    --background-card: #ffffff;
+
+    --border-color: #ddd;
+    --input-bg: #f9f9f9;
+    --input-color: #213547;
+    --placeholder-color: #999;
+    --item-bg: #f5f5f5;
+    --item-bg-hover: #eee;
+  }
+}
+
+/* ======================================= */
+/* 2. ESTILOS DE LAYOUT Y NAVBAR (App.css) */
+/* ======================================= */
+
+/* --- Contenedor Principal de la Aplicación (Root) --- */
+#root {
+  max-width: 1280px;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+/* --- Estilos para la Barra de Navegación (Navbar) --- */
+.app-navbar {
+  background-color: var(--background-card);
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Alinea los elementos del menú horizontalmente */
+  gap: 20px;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: 8px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+}
+
+.nav-button:hover {
+  color: var(--color-primary);
+  background-color: var(--item-bg);
+}
+
+.nav-button.active {
+  /* Estilo para el botón de la página actualmente seleccionada */
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+}
+
+.nav-button.active:hover {
+  background-color: var(--color-primary); 
+  color: white;
+}
+
+/* --- Contenedor del contenido de la página --- */
+.page-content {
+  padding: 0 20px;
+}
+
+/* ======================================= */
+/* 3. ESTILOS PARA MONEDAS Y ENTIDADES PAGE */
+/* (Formularios y Listas) */
+/* ======================================= */
+
+/* --- Contenedor Principal de la Página Monedas --- */
+.monedas-page-container {
+    max-width: 800px; 
+    margin: 40px auto; /* Centra el contenedor */
+    padding: 30px;
+    background-color: var(--background-card); 
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.monedas-page-container h1 { 
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--color-primary);
+    font-size: 2.5em; 
+}
+
+/* --- Formulario de Creación/Edición (moneda-form) --- */
+.moneda-form {
+    display: flex;
+    gap: 10px; 
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    flex-wrap: wrap; 
+    align-items: center;
+}
+
+.moneda-input {
+    flex-grow: 1; /* Permite que crezca para ocupar espacio */
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--input-color);
+    min-width: 120px; 
+}
+
+.moneda-input::placeholder {
+    color: var(--placeholder-color);
+}
+
+/* Botón de Creación/Guardar (por defecto) */
+.create-button {
+    background-color: var(--color-primary); 
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0; /* Evita que el botón se comprima */
+}
+
+.create-button:hover {
+    background-color: #535bf2;
+    border-color: #535bf2;
+}
+
+/* --- Botones de Acción Específicos (Edición/Eliminación) --- */
+
+/* Botón de Editar en la lista */
+.edit-button {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    background-color: #ffc107; /* Amarillo */
+    color: #212529; /* Texto oscuro para contraste */
+    transition: background-color 0.25s;
+    border: 1px solid #ffc107;
+}
+
+.edit-button:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+}
+
+/* Botón de Eliminar en la lista */
+.delete-button {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    background-color: #f44336; /* Rojo */
+    color: white;
+    transition: background-color 0.25s;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+/* Botón de Actualizar (cuando el form está en modo edición) */
+.create-button.update-mode {
+    background-color: #007bff; /* Azul para Actualizar */
+}
+
+.create-button.update-mode:hover {
+    background-color: #0056b3;
+}
+
+/* Botón de Cancelar */
+.cancel-button {
+    background-color: #6c757d; /* Gris para Cancelar */
+    color: white;
+    flex-shrink: 0;
+}
+
+.cancel-button:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+
+/* --- Lista de Monedas/Entidades (monedas-list) --- */
+.monedas-list {
+    list-style: none; /* Quita los puntos de la lista */
+    padding: 0;
+}
+
+.moneda-item {
+    display: flex;
+    justify-content: space-between; /* Alinea información y botones */
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: var(--item-bg);
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.moneda-item:hover {
+    background-color: var(--item-bg-hover);
+}
+
+.moneda-info {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--color-secondary);
+}
+
+
+/* ======================================= */
+/* 4. ESTILOS PARA HISTORICAS PAGE (Tablas) */
+/* ======================================= */
+
+/* --- Contenedor Principal de la Página Históricas --- */
+.historicas-page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--background-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.historicas-page-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--color-primary);
+  font-size: 2.2em;
+}
+
+.list-title {
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-top: 40px;
+  color: var(--color-text-secondary);
+}
+
+/* --- Formulario de Creación (historica-form y historica-input) --- */
+.historica-form {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.historica-input {
+  flex-grow: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: var(--input-bg);
+  color: var(--input-color);
+}
+
+.historica-input::placeholder {
+  color: var(--placeholder-color);
+}
+
+/* Botón de Creación Específico para Históricas (verde) */
+.historica-form .create-button { 
+  background-color: #28a745; 
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.historica-form .create-button:hover {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+
+/* --- Tabla de Históricos --- */
+.historicas-table {
+  width: 100%;
+  border-collapse: collapse; /* Colapsa los bordes */
+  margin-top: 20px;
+  table-layout: fixed; /* Ayuda a que las columnas se manejen mejor */
+}
+
+.historicas-table thead {
+  background-color: var(--item-bg-hover);
+}
+
+.historicas-table th,
+.historicas-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  word-wrap: break-word; /* Previene desbordamiento en celdas pequeñas */
+}
+
+.historicas-table th {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.historica-row {
+  transition: background-color 0.3s;
+}
+
+.historica-row:hover {
+  background-color: var(--item-bg);
+}
+
+.historica-row td {
+  color: var(--color-text-secondary);
+  font-size: 0.95em;
+}
+
+/* Botón de Eliminar en la Tabla (más pequeño) */
+.historica-row .delete-button {
+  padding: 0.3em 0.6em;
+  font-size: 0.8em;
+  background-color: #dc3545;
+  color: white;
+  margin: 0;
+}
+
+.historica-row .delete-button:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
