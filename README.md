@@ -38,7 +38,7 @@ DATABASE_URL="postgresql://user:password@host:port/database_name"
 
 ```
 
-### 1. Variables de Entorno
+### 2. PostgreSQL
 
 Base de datos utilizada para el proyecto
 
